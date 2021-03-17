@@ -1,0 +1,51 @@
+from selenium import webdriver 
+from selenium.webdriver.common.keys import Keys
+import time
+import schedule
+from selenium.webdriver.common.action_chains import ActionChains
+import tkinter.messagebox as tmsg
+
+def main(code):
+    driver = webdriver.Chrome(r"C:/Program Files/Google/Chrome/Application/chromedriver")
+    options = webdriver.ChromeOptions()
+    options.addPreference("permissions.default.microphone", 1)
+    options.addPreference("permissions.default.camera", 1)
+
+    driver.get("https://meet.google.com/landing?authuser=1")
+
+    element_1 = driver.find_element_by_name("identifier")
+    element_1.send_keys("sms24112@stmarks.edu.hk")
+    element_1.send_keys(Keys.CONTROL,'\ue007')
+    time.sleep(4)
+
+    element_2 = driver.find_element_by_name("password")
+    element_2.send_keys("0721720200")
+    element_2.send_keys(Keys.CONTROL,'\ue007')
+    time.sleep(4)
+
+    element_3 = driver.find_element_by_id("i3")
+    element_3.send_keys(code)
+    element_3.send_keys(Keys.CONTROL,'\ue007')
+    time.sleep(4)
+
+    actions = ActionChains(driver)
+    actions.send_keys(Keys.LEFT_CONTROL + 'd')
+    actions.send_keys(Keys.LEFT_CONTROL + 'e')
+    element_4 = driver.find_elements_by_xpath('//*[@id="yDmH0d"]/c-wiz/div/div/div[9]/div[3]/div/div/div[2]/div/div[1]/div[2]/div/div[2]/div/div[1]/div[1]/span/span')
+ 
+    driver.close()
+
+if __name__ = "__main__":
+    schedule.every().monday.at("08:45").do(main , "WHS")
+    schedule.every().monday.at("13:15").do(main , "YLL")
+    schedule.every().monday.at("14:45").do(main , "YHT")
+    schedule.every().tuesday.at("08:45").do(main , "ML")
+    schedule.every().wednesday.at("08:00").do(main , "3B")
+    schedule.every().wednesday.at("10:15").do(main , "KYH")
+    schedule.every().wednesday.at("13:15").do(main , "KMK")
+    schedule.every().wednesday.at("14:45").do(main , "WKL")
+    schedule.every().thursday.at("14:45").do(main , "SPC")
+    schedule.every().wednesday.at("08:45").do(main , "IC")
+    schedule.every().wednesday.at("10:15").do(main , "SPC")
+    schedule.every().wednesday.at("13:15").do(main , "ML")
+    schedule.every().wednesday.at("14:45").do(main , "KYH")
